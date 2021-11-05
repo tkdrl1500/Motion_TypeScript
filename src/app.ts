@@ -1,5 +1,9 @@
 import { Component } from './components/component.js';
-import { Composable, PageComponent } from './components/page/page.js';
+import {
+  Composable,
+  PageComponent,
+  PageItemComponent,
+} from './components/page/page.js';
 import { ImageComponent } from './components/page/item/image.js';
 import { NoteComponent } from './components/page/item/note.js';
 import { TodoComponent } from './components/page/item/todo.js';
@@ -9,7 +13,7 @@ class App {
   // page는 Component이면서 addChild를 할 수있는 Composable이 가능한 요소이다
   private readonly page: Component & Composable;
   constructor(appRoot: HTMLElement) {
-    this.page = new PageComponent();
+    this.page = new PageComponent(PageItemComponent);
     this.page.attachTo(appRoot);
 
     const image = new ImageComponent(
