@@ -1,9 +1,9 @@
 import { Component } from './components/component.js';
+import { Composable, PageComponent } from './components/page/page.js';
 import { ImageComponent } from './components/page/item/image.js';
 import { NoteComponent } from './components/page/item/note.js';
 import { TodoComponent } from './components/page/item/todo.js';
 import { VideoComponent } from './components/page/item/video.js';
-import { Composable, PageComponent } from './components/page/page.js';
 
 class App {
   // page는 Component이면서 addChild를 할 수있는 Composable이 가능한 요소이다
