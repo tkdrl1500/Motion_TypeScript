@@ -7,6 +7,7 @@ export interface Composable {
 // 아무것도 전달 받지 않고 아무것도 리턴하지 않고 단지 닫쳤다고 알려주기만 하는 콜백함수이다
 type OnCloseListener = () => void;
 
+//PageItemComponent는 setOnCloseListener는 꼭 구현해야 된다 close가 가능해야되기 때문이다
 interface SectionContainer extends Component, Composable {
   setOnCloseListener(listener: OnCloseListener): void;
 }
@@ -16,7 +17,6 @@ type SectionContainerConstructor = {
   new (): SectionContainer;
 };
 
-//PageItemComponent는 setOnCloseListener는 꼭 구현해야 된다 close가 가능해야되기 때문이다
 export class PageItemComponent
   extends BaseComponent<HTMLElement>
   implements SectionContainer
@@ -58,7 +58,7 @@ export class PageComponent
   }
 
   addChild(section: Component) {
-    const item = new this.pageItemConstructor();
+    const item = new this.pageItemConstructor(); //외부에서 전달된 pageItemConstructor를 이용해서 만들 수 있게 수정
     item.addChild(section);
     item.attachTo(this.element, 'beforeend');
     item.setOnCloseListener(() => {
