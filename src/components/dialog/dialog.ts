@@ -34,7 +34,7 @@ export class InputDialog
       '.dialog__submit'
     )! as HTMLElement;
     submitBtn.addEventListener('click', () => {
-      this.closeListener && this.closeListener();
+      this.submitListener && this.submitListener();
     });
     // submitBtn.onclick = () => {
     //   this.closeListener && this.closeListener();
