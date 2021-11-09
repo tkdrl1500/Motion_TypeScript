@@ -25,7 +25,7 @@ export class PageItemComponent
   // 외부로 부터 받은 콜백함수를 closeListener 변수에 저장
   private closeListener?: OnCloseListener;
   constructor() {
-    super(`<li class="page-item">
+    super(`<li draggable="true" class="page-item">
             <section class="page-item__body"></section>
             <div class="page-item__controls">
               <button class="close">&times;</button>
@@ -35,7 +35,23 @@ export class PageItemComponent
     closeBtn.onclick = () => {
       this.closeListener && this.closeListener(); // closeListener가 있으면 closeListener를 호출
     };
+
+    // Drag Event
+    this.element.addEventListener('dragstart', (event: DragEvent) => {
+      this.onDragStart(event);
+    });
+    this.element.addEventListener('dragend', (event: DragEvent) => {
+      this.onDragEnd(event);
+    });
   }
+
+  onDragStart(event: DragEvent) {
+    console.log('dragstart', event);
+  }
+  onDragEnd(event: DragEvent) {
+    console.log('dragend', event);
+  }
+
   addChild(child: Component) {
     const container = this.element.querySelector(
       '.page-item__body'
@@ -55,6 +71,23 @@ export class PageComponent
 {
   constructor(private pageItemConstructor: SectionContainerConstructor) {
     super(`<ul class='page'></ul>`);
+
+    // Drag Event
+    this.element.addEventListener('dragover', (event: DragEvent) => {
+      this.onDragOver(event);
+    });
+    this.element.addEventListener('drop', (event: DragEvent) => {
+      this.onDrag(event);
+    });
+  }
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    console.log('dragover', event);
+  }
+  onDrag(event: DragEvent) {
+    event.preventDefault();
+    console.log('drag', event);
   }
 
   addChild(section: Component) {
